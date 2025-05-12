@@ -1,0 +1,13 @@
+{
+    "addons": {
+      "fayara@fayaraai.com": {
+        "updates": [
+          {
+            "version": "1.0.0",
+            "update_link": "https://github.com/MDFahimAnjum/fayara/releases/fayara-firefox-1.0.0.xpi"
+          }
+        ]
+      }
+    }
+  }
+  
