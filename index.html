@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fayara - Your Local AI Powerhouse for Browsers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4F46E5; /* Modern indigo */
+            --primary-hover-color: #4338CA;
+            --primary-light-color: #EEF2FF;
+            --secondary-color: #6B7280; /* Cool Gray */
+            --light-bg-color: #F9FAFB;
+            --dark-text-color: #111827;
+            --light-text-color: #4B5563;
+            --white-color: #FFFFFF;
+            --border-color: #E5E7EB;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+            --header-height: 80px;
+            --transition-duration: 0.3s;
+            --carousel-transition-duration: 0.5s;
+            --carousel-interval-duration: 4000ms; /* Used for both hero and features carousels */
+        }
+
+        /* Reset and Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--dark-text-color);
+            background-color: var(--white-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-text-color);
+            margin-bottom: 0.75em;
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #4F46E5 0%, #8B5CF6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 2.25rem;
+            font-weight: 600;
+            position: relative;
+            display: inline-block; /* For the :after pseudo-element to be positioned correctly */
+        }
+
+        /* This will apply to h2s that are centered via a parent div with text-align: center */
+        .section-title:after,
+        h2.section-title:after { /* If h2 has the class directly */
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), #8B5CF6);
+            border-radius: 2px;
+        }
+        /* For h2s that are not text-align: center, the :after might need left:0 and no transform if display:block */
+
+
+        h3 {
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--light-text-color);
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color var(--transition-duration) ease;
+        }
+
+        a:hover {
+            color: var(--primary-hover-color);
+            text-decoration: none; /* Keep consistent with base 'a' */
+        }
+
+        /* Header */
+        .main-header {
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 0 20px;
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .main-header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+        }
+
+        .main-nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            margin: 0;
+        }
+
+        .main-nav li {
+            margin-left: 30px;
+        }
+
+        .main-nav a {
+            color: var(--dark-text-color);
+            font-weight: 500;
+            text-decoration: none;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .main-nav a:not(.btn):after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .main-nav a:not(.btn):hover:after,
+        .main-nav a:not(.btn).active:after {
+            width: 100%;
+        }
+
+        .main-nav a.active { /* For JS to set active state */
+            color: var(--primary-color);
+        }
+
+        .main-nav a[href="#cta"] {
+            color: #8B5CF6; /* Vibrant violet, from h1 gradient */
+            font-weight: 600; /* Make it slightly bolder */
+        }
+
+        .main-nav a[href="#cta"]:hover {
+            color: #7042DA; /* Darker violet for hover */
+            /* The :after underline will still apply */
+        }
+
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all var(--transition-duration) ease;
+            font-size: 0.95rem;
+            border: 1px solid transparent; /* Base border */
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 6px rgba(79, 70, 229, 0.15);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover-color);
+            border-color: var(--primary-hover-color);
+            color: var(--white-color);
+            text-decoration: none;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(79, 70, 229, 0.2);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-light-color);
+            color: var(--primary-color); /* Ensure color remains */
+            text-decoration: none;
+            transform: translateY(-1px);
+        }
+
+        .btn-lg {
+            font-size: 1.1rem;
+            padding: 14px 30px;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%);
+            padding-top: calc(var(--header-height) + 80px); /* Space for fixed header + content padding */
+            padding-bottom: 100px;
+            padding-left: 0;
+            padding-right: 0;
+            text-align: center;
+            min-height: 85vh; /* Keep some min height */
+            position: relative;
+            overflow: hidden; /* For pseudo-elements */
+        }
+
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(79, 70, 229, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero h1 {
+            margin-bottom: 20px;
+            max-width: 800px; /* Limit width of h1 */
+        }
+
+        .hero p.subtitle {
+            font-size: 1.25rem;
+            color: var(--light-text-color);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-content-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-btn-container {
+            margin-bottom: 60px;
+        }
+
+        .hero-visual-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px; /* Max width of the GIF display area */
+            min-height: 450px; /* Approximate height of GIFs to prevent layout shift, adjust as needed */
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            background-color: #e0e7ff; /* Fallback bg while image loads */
+        }
+
+        .hero-feature-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity var(--carousel-transition-duration) ease-in-out, visibility 0s linear var(--carousel-transition-duration);
+        }
+
+        .hero-feature-slide.active {
+            opacity: 1;
+            visibility: visible;
+            position: relative; /* Take up space when active */
+            transition: opacity var(--carousel-transition-duration) ease-in-out;
+        }
+
+        .hero-feature-slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px; /* Match container or slightly less */
+        }
+
+        .feature-ribbon {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px; /* Space above ribbon */
+            flex-wrap: wrap;
+            gap: 10px; /* Spacing between pills */
+        }
+
+        .feature-pill {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--light-text-color);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            cursor: pointer;
+        }
+
+        .feature-pill.active {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 4px 10px rgba(79, 70, 229, 0.2);
+            border-color: var(--primary-color);
+        }
+
+
+        /* Benefits Section */
+        .benefits {
+            padding: 100px 0;
+            background-color: var(--white-color);
+            position: relative;
+        }
+
+        .benefits:before { /* Subtle transition from hero bg */
+            content: '';
+            position: absolute;
+            top: -50px; /* Overlap slightly */
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, #E0E7FF, var(--white-color));
+            z-index: -1;
+        }
+
+        .benefits .section-title-container { /* Wrapper for centering h2 and its :after */
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .benefit-item {
+            text-align: center;
+            padding: 40px 25px;
+            background-color: var(--white-color);
+            border-radius: 16px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .benefit-item .icon {
+            font-size: 3rem; /* Increased size */
+            margin-bottom: 20px;
+            display: inline-block;
+            color: var(--primary-color); /* Use primary color for icons */
+        }
+
+        .benefit-item h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--dark-text-color);
+        }
+
+        .benefit-item p {
+            font-size: 1rem;
+            color: var(--light-text-color);
+        }
+
+        /* Features Section (Carousel) */
+        .features-showcase {
+            padding: 100px 0;
+            background-color: var(--light-bg-color);
+            position: relative;
+        }
+        .features-showcase .section-title-container { /* Wrapper for centering h2 and its :after */
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .carousel-container {
+            position: relative;
+            min-height: 520px; /* Adjust based on tallest feature block content + padding + image */
+            overflow: hidden; /* Hide non-active slides */
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 16px; /* More rounded */
+            box-shadow: var(--card-shadow);
+            background-color: var(--white-color); /* BG for the container */
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity var(--carousel-transition-duration) ease-in-out, visibility 0s linear var(--carousel-transition-duration);
+            background-color: var(--white-color); /* BG for individual slides */
+            border-radius: 16px; /* Match container */
+            padding: 40px; /* More padding */
+            box-sizing: border-box;
+        }
+
+        .carousel-slide.active-slide {
+            opacity: 1;
+            visibility: visible;
+            position: relative; /* Take up space in the document flow when active */
+            transition: opacity var(--carousel-transition-duration) ease-in-out;
+        }
+
+        .carousel-slide h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            font-size: 1.6em;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .carousel-slide p {
+            margin-bottom: 20px;
+            color: var(--light-text-color);
+            font-size: 1.05rem;
+            min-height: 3.4em; /* Approx 2 lines (2 * 1.7 line-height) */
+        }
+
+        .carousel-slide p:last-of-type { /* Ensure last p in slide has no bottom margin if it's truly the last element */
+            margin-bottom: 0;
+        }
+         .carousel-slide .feature-gif {
+             display: block;
+             max-width: 100%;
+             height: auto;
+             margin: 25px auto; /* More margin */
+             border-radius: 12px; /* Softer radius */
+             box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        .carousel-slide strong { /* For "How to use:" */
+             color: var(--dark-text-color);
+             font-weight: 600;
+        }
+        .feature-actions-list {
+            list-style-type: none; /* Remove default bullets */
+            padding-left: 0;
+            margin-top: 15px;
+            margin-bottom: 20px;
+        }
+        .feature-actions-list li {
+            margin-bottom: 12px;
+            color: var(--light-text-color);
+            position: relative;
+            padding-left: 30px; /* Space for custom bullet */
+        }
+        .feature-actions-list li:before {
+            content: "•"; /* Custom bullet */
+            position: absolute;
+            left: 10px; /* Position custom bullet */
+            color: var(--primary-color);
+            font-size: 1.5rem; /* Size of custom bullet */
+            line-height: 1; /* Align bullet with text */
+        }
+        .feature-actions-list .action-name {
+            color: var(--primary-color); /* Use primary color for action name */
+            font-weight: 600;
+        }
+        .carousel-dots {
+            text-align: center;
+            margin-top: 30px; /* More space for dots */
+        }
+        .carousel-dot {
+            display: inline-block;
+            width: 12px; /* Larger dots */
+            height: 12px;
+            margin: 0 6px;
+            background-color: #E5E7EB; /* Lighter inactive dot */
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all var(--transition-duration) ease;
+        }
+        .carousel-dot.active {
+            background-color: var(--primary-color);
+            transform: scale(1.2); /* Active dot emphasis */
+        }
+
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 100px 0;
+            background-color: var(--white-color);
+        }
+        .how-it-works .section-title-container {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            align-items: start; /* Align items to the start of the grid cell */
+        }
+        .step-item {
+            text-align: center;
+            padding: 40px 30px;
+            background-color: var(--white-color);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        .step-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--card-shadow);
+        }
+        .step-item .step-icon {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            line-height: 1;
+            opacity: 0.9;
+        }
+        .step-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark-text-color);
+        }
+        .step-item code {
+            background-color: var(--primary-light-color); /* Lighter code bg */
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.95em;
+            color: #6D28D9; /* Purple for code text */
+            display: inline-block;
+            margin-top: 12px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+        .step-item .download-button-small {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 8px;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        .step-item .download-button-small:hover {
+            background-color: #4B5563; /* Darken secondary */
+            text-decoration: none;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #6D28D9 100%); /* Primary to a darker purple */
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-section:before { /* Subtle pattern for CTA */
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-image:
+                radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 30%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 30%);
+        }
+        .cta-section .container { position: relative; z-index: 1; } /* Ensure content is above :before */
+
+        .cta-section .section-title-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .cta-section h2 {
+            color: var(--white-color);
+            font-size: 2.5rem;
+        }
+        .cta-section h2:after { /* Make CTA h2 underline lighter */
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .cta-section p {
+            color: #E0E7FF; /* Lighter text for CTA paragraph */
+            max-width: 600px;
+            margin-left:auto;
+            margin-right:auto;
+            margin-bottom: 40px;
+        }
+        .cta-section .btn-light {
+            background-color: var(--white-color);
+            color: var(--primary-color);
+            padding: 16px 35px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border: none;
+        }
+        .cta-section .btn-light:hover {
+            background-color: #f8f9fa; /* Slightly off-white hover */
+            color: var(--primary-hover-color);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Footer */
+        .main-footer {
+            background-color: #1F2937; /* Dark blue-gray */
+            color: #9CA3AF; /* Lighter gray for text */
+            padding: 70px 0 50px;
+            text-align: center;
+        }
+        .main-footer p {
+            margin-bottom: 12px;
+            color: #9CA3AF;
+            font-size: 0.95rem;
+        }
+        .main-footer a {
+            color: #E5E7EB; /* Even lighter for links */
+            transition: color 0.3s ease;
+        }
+        .main-footer a:hover {
+            color: var(--white-color);
+        }
+        .footer-nav ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 25px;
+        }
+        .footer-nav li {
+            display: inline-block;
+            margin: 0 15px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            .carousel-slide { padding: 30px; }
+            .hero-visual-container { min-height: 380px; } /* Adjust for 1024px */
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+
+            .hero {
+                padding-top: calc(var(--header-height) + 60px); /* Adjust hero padding */
+                padding-bottom: 60px;
+                min-height: auto; /* Allow hero to shrink */
+            }
+            .hero p.subtitle {
+                font-size: 1.1rem;
+            }
+            .hero-visual-container { min-height: 320px; } /* Adjust for 768px */
+
+
+            .main-header {
+                height: auto; /* Allow header to grow if nav wraps */
+                padding-top: 15px;
+                padding-bottom: 15px;
+            }
+            .main-header .container {
+                flex-direction: column;
+                align-items: center; /* Center logo and nav */
+            }
+            .main-nav {
+                width: 100%;
+                justify-content: center;
+                margin-top: 15px;
+            }
+            .main-nav ul {
+                flex-direction: row; /* Keep nav items in a row if space allows */
+                justify-content: center;
+                flex-wrap: wrap; /* Allow nav items to wrap */
+                gap: 5px 15px; /* Spacing for wrapped items */
+            }
+            .main-nav li {
+                margin-left: 0; /* Remove left margin, use gap instead */
+            }
+
+            .carousel-slide { padding: 25px; }
+            .carousel-slide h3 { font-size: 1.4em; }
+            .carousel-slide p { font-size: 1rem; }
+            .carousel-container { min-height: 580px; } /* From incomplete */
+
+            .benefit-item, .step-item {
+                padding: 30px 20px;
+            }
+            .hero-btn-container {
+                margin-bottom: 40px;
+            }
+            .benefits, .features-showcase, .how-it-works, .cta-section {
+                padding: 80px 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.6rem; }
+            .hero p.subtitle {
+                font-size: 1rem;
+            }
+            .hero-visual-container { min-height: 250px; } /* Adjust for 576px */
+
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            .btn-lg {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            .feature-pill {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+            .carousel-container { min-height: 620px; } /* From incomplete */
+            .carousel-slide { padding: 20px; }
+
+            .step-item .step-icon {
+                font-size: 2.8rem;
+                margin-bottom: 20px;
+            }
+            .step-item h3 {
+                font-size: 1.3rem;
+            }
+            .cta-section h2 {
+                font-size: 1.8rem;
+            }
+            .cta-section .btn-light {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            .benefits, .features-showcase, .how-it-works, .cta-section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <a href="#" class="logo">Fayara</a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#cta">Get Fayara</a></li>
+                    <li><a href="help.html">Help</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="container">
+                <h1>Fayara: Your Local AI Powerhouse for Browsers</h1>
+                <p class="subtitle">
+                    Experience the future of browsing with AI that runs on your machine.
+                    Chat, summarize, proofread, and automate tasks with privacy and control.
+                </p>
+
+                <div class="hero-content-wrapper">
+                    <div class="hero-btn-container">
+                        <a href="https://addons.mozilla.org/firefox/addon/fayara/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">Download Fayara for Firefox</a>
+                    </div>
+
+                    <div class="hero-visual-container">
+                        <!-- Hero Feature Slides -->
+                        <div class="hero-feature-slide active">
+                            <img src="assets/fayara1o.gif" alt="Chat with AI" class="feature-gif">
+                        </div>
+                        <div class="hero-feature-slide">
+                            <img src="assets/fayara2o_cropped.gif" alt="Chat with Websites" class="feature-gif">
+                        </div>
+                        <div class="hero-feature-slide">
+                            <img src="assets/fayara3o.gif" alt="Chat with Local PDFs" class="feature-gif">
+                        </div>
+                        <div class="hero-feature-slide">
+                            <img src="assets/fayara5o.gif" alt="Autocomplete Text" class="feature-gif">
+                        </div>
+                        <div class="hero-feature-slide">
+                            <img src="assets/fayara6o.gif" alt="Proofread Selected Text" class="feature-gif">
+                        </div>
+                    </div>
+
+                    <div class="feature-ribbon">
+                        <div class="feature-pill active" data-slide-index="0">Chat with AI</div>
+                        <div class="feature-pill" data-slide-index="1">Chat with Websites</div>
+                        <div class="feature-pill" data-slide-index="2">Chat with Local PDFs</div>
+                        <div class="feature-pill" data-slide-index="3">Autocomplete Text</div>
+                        <div class="feature-pill" data-slide-index="4">Proofread Text</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="benefits" class="benefits">
+            <div class="container">
+                <div class="section-title-container">
+                    <h2 class="section-title">Why Choose Fayara?</h2>
+                </div>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <div class="icon">🧠</div>
+                        <h3>Local AI Processing</h3>
+                        <p>Runs AI models directly on your computer via Ollama for enhanced speed and offline capabilities.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="icon">🛡️</div>
+                        <h3>Privacy First</h3>
+                        <p>Your data stays on your device. No need to send sensitive information to third-party clouds.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="icon">🔧</div>
+                        <h3>Your Models, Your Control</h3>
+                        <p>Choose and manage the AI models you want to use through Ollama's extensive library.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="icon">🔌</div>
+                        <h3>Browser Extension</h3>
+                        <p>Currently available for Firefox, with seamless integration into your browsing experience for maximum productivity.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features-showcase">
+            <div class="container">
+                <div class="section-title-container">
+                    <h2 class="section-title">Key Features</h2>
+                </div>
+                <div class="carousel-container">
+                    <!-- Slide 1 -->
+                    <div class="carousel-slide active-slide">
+                        <h3>Chat with AI</h3>
+                        <p>Ask questions, get answers, and have natural conversations with powerful AI models right in your browser.</p>
+                        <img src="assets/fayara1o.gif" alt="Chat with AI" class="feature-gif">
+                        <ul class="feature-actions-list">
+                            <li><span class="action-name">Smart Search:</span> Ask complex queries and get precise answers</li>
+                            <li><span class="action-name">Coding Help:</span> Get programming assistance and code explanations</li>
+                            <li><span class="action-name">Creative Writing:</span> Generate ideas, outlines, and content</li>
+                        </ul>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="carousel-slide">
+                        <h3>Chat with Websites</h3>
+                        <p>Interact with web page content directly. Ask questions about articles, research papers, or documentation.</p>
+                        <img src="assets/fayara2o_cropped.gif" alt="Chat with Websites" class="feature-gif">
+                        <ul class="feature-actions-list">
+                            <li><span class="action-name">Content Summaries:</span> Get the key points of any webpage</li>
+                            <li><span class="action-name">Detailed Analysis:</span> Ask specific questions about the content</li>
+                            <li><span class="action-name">Language Translation:</span> Understand content in different languages</li>
+                        </ul>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="carousel-slide">
+                        <h3>Chat with Local PDFs</h3>
+                        <p>Upload and interact with your PDF files without sending them to external servers.</p>
+                        <img src="assets/fayara3o.gif" alt="Chat with Local PDFs" class="feature-gif">
+                        <ul class="feature-actions-list">
+                            <li><span class="action-name">Document Q&A:</span> Ask questions about your PDF content</li>
+                            <li><span class="action-name">Extract Information:</span> Pull out specific data and insights</li>
+                            <li><span class="action-name">Document Comparison:</span> Compare information across multiple PDFs</li>
+                        </ul>
+                    </div>
+                    <!-- Slide 4 -->
+                    <div class="carousel-slide">
+                        <h3>Autocomplete Text</h3>
+                        <p>Write faster with AI-powered text completion for emails, social media posts, or any text field.</p>
+                        <img src="assets/fayara5o.gif" alt="Autocomplete Text" class="feature-gif">
+                        <ul class="feature-actions-list">
+                            <li><span class="action-name">Smart Suggestions:</span> Get context-aware text completions</li>
+                            <li><span class="action-name">Style Matching:</span> AI adapts to your writing style</li>
+                            <li><span class="action-name">Multiple Languages:</span> Works across various languages</li>
+                        </ul>
+                    </div>
+                    <!-- Slide 5 -->
+                    <div class="carousel-slide">
+                        <h3>Proofread Selected Text</h3>
+                        <p>Improve your writing with AI-powered grammar checking, rephrasing, and style suggestions.</p>
+                        <img src="assets/fayara6o.gif" alt="Proofread Selected Text" class="feature-gif">
+                        <ul class="feature-actions-list">
+                            <li><span class="action-name">Grammar Correction:</span> Fix errors and typos instantly</li>
+                            <li><span class="action-name">Style Enhancement:</span> Get suggestions for clearer writing</li>
+                            <li><span class="action-name">Tone Adjustment:</span> Adapt your text for different audiences</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="carousel-dots"></div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="how-it-works">
+            <div class="container">
+                <div class="section-title-container">
+                     <h2 class="section-title">Simple Setup, Powerful Results</h2>
+                </div>
+                <div class="steps-grid">
+                    <div class="step-item">
+                        <div class="step-icon">⚙️</div>
+                        <h3>1. Install Ollama</h3>
+                        <p>Fayara uses Ollama to run AI models locally. Download and install it first.</p>
+                        <a href="https://ollama.com/download" target="_blank" rel="noopener noreferrer" class="download-button-small">Get Ollama</a>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-icon">💾</div>
+                        <h3>2. Download AI Models</h3>
+                        <p>Pull your desired models via the command line. For example:</p>
+                        <code>ollama pull llama3</code><br>
+                        <code>ollama pull nomic-embed-text</code>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-icon">🚀</div>
+                        <h3>3. Install Fayara</h3>
+                        <p>Add the Fayara extension to your Firefox browser and start exploring!</p>
+                        <a href="https://addons.mozilla.org/firefox/addon/fayara/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Install Fayara</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cta" class="cta-section">
+            <div class="container">
+                <div class="section-title-container">
+                    <h2 class="section-title">Ready to Power Up Your Browsing?</h2>
+                </div>
+                <p>
+                    Join the growing community of users who are taking control of their AI experience with Fayara.
+                </p>
+                <a href="https://addons.mozilla.org/firefox/addon/fayara/" target="_blank" rel="noopener noreferrer" class="btn btn-light">Download Fayara for Firefox - It's Free!</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <nav class="footer-nav">
+                <ul>
+                    <li><a href="privacyPolicy.html">Privacy Policy</a></li>
+                    <li><a href="onboarding.html">Onboarding Guide</a></li>
+                    <li><a href="help.html">Help</a></li>
+                    <li><a href="https://github.com/MDFahimAnjum/fayara.github.io">Contact/Support</a></li>
+                </ul>
+            </nav>
+            <p>&copy; 2024 Fayara. All rights reserved.</p>
+            <p>Fayara is a browser extension that enhances your web experience with local AI capabilities via Ollama.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const baseCarouselIntervalDuration = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--carousel-interval-duration')) || 4000;
+
+            // --- Hero Slideshow ---
+            let heroCarouselInterval = null;
+            let currentHeroSlideIndex = 0;
+            const heroSlides = document.querySelectorAll('.hero-feature-slide');
+            const featurePills = document.querySelectorAll('.feature-pill');
+
+            function showHeroSlide(index, stopAutoplay = false) {
+                if (heroSlides.length === 0 || featurePills.length === 0) return;
+
+                currentHeroSlideIndex = (index + heroSlides.length) % heroSlides.length; // Ensure index is within bounds
+
+                heroSlides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === currentHeroSlideIndex);
+                });
+                featurePills.forEach((pill, i) => {
+                    pill.classList.toggle('active', i === currentHeroSlideIndex);
+                });
+
+                if (stopAutoplay) {
+                    stopHeroCarousel();
+                }
+            }
+
+            function nextHeroSlide() {
+                showHeroSlide(currentHeroSlideIndex + 1);
+            }
+
+            function startHeroCarousel() {
+                stopHeroCarousel();
+                if (heroSlides.length > 1) {
+                    showHeroSlide(currentHeroSlideIndex); // Show initial or current slide
+                    heroCarouselInterval = setInterval(nextHeroSlide, baseCarouselIntervalDuration);
+                } else if (heroSlides.length === 1) {
+                    showHeroSlide(0); // Show the single slide
+                }
+            }
+
+            function stopHeroCarousel() {
+                if (heroCarouselInterval) {
+                    clearInterval(heroCarouselInterval);
+                    heroCarouselInterval = null;
+                }
+            }
+
+            if (heroSlides.length > 0 && featurePills.length > 0) {
+                featurePills.forEach(pill => {
+                    pill.addEventListener('click', (e) => {
+                        const index = parseInt(e.currentTarget.dataset.slideIndex);
+                        showHeroSlide(index, true); // Show clicked slide and stop autoplay
+                    });
+                });
+                startHeroCarousel(); // Initialize and start the hero carousel
+            }
+
+            // --- Features Showcase Carousel ---
+            let featuresCarouselInterval = null;
+            let currentFeaturesSlideIndex = 0;
+            const featuresSlides = document.querySelectorAll('#features .carousel-slide');
+            const featuresDotsContainer = document.querySelector('#features .carousel-dots');
+            let featuresDots = [];
+
+            if (featuresSlides.length > 0 && featuresDotsContainer) {
+                featuresSlides.forEach((_, i) => {
+                    const dot = document.createElement('span');
+                    dot.classList.add('carousel-dot');
+                    dot.dataset.index = i;
+                    featuresDotsContainer.appendChild(dot);
+                    featuresDots.push(dot);
+                });
+
+                featuresDots.forEach(dot => {
+                    dot.addEventListener('click', (e) => {
+                        const index = parseInt(e.target.dataset.index);
+                        showFeaturesSlide(index);
+                        resetFeaturesCarouselInterval();
+                    });
+                });
+            }
+
+            function showFeaturesSlide(index) {
+                if (featuresSlides.length === 0) return;
+                currentFeaturesSlideIndex = (index + featuresSlides.length) % featuresSlides.length;
+
+                featuresSlides.forEach((slide, i) => {
+                    slide.classList.toggle('active-slide', i === currentFeaturesSlideIndex);
+                });
+                if (featuresDots.length > 0) {
+                    featuresDots.forEach((dot, i) => {
+                        dot.classList.toggle('active', i === currentFeaturesSlideIndex);
+                    });
+                }
+            }
+
+            function nextFeaturesSlide() {
+                showFeaturesSlide(currentFeaturesSlideIndex + 1);
+            }
+
+            function startFeaturesCarousel() {
+                stopFeaturesCarousel();
+                if (featuresSlides.length > 1) {
+                    showFeaturesSlide(currentFeaturesSlideIndex);
+                    featuresCarouselInterval = setInterval(nextFeaturesSlide, baseCarouselIntervalDuration);
+                } else if (featuresSlides.length === 1) {
+                    showFeaturesSlide(0);
+                }
+            }
+
+            function stopFeaturesCarousel() {
+                if (featuresCarouselInterval) {
+                    clearInterval(featuresCarouselInterval);
+                    featuresCarouselInterval = null;
+                }
+            }
+
+            function resetFeaturesCarouselInterval() {
+                stopFeaturesCarousel();
+                startFeaturesCarousel();
+            }
+
+            if (featuresSlides.length > 0) {
+                startFeaturesCarousel();
+            }
+
+            // --- Smooth Scroll for Nav Links ---
+            document.querySelectorAll('.main-nav a[href^="#"]:not(.btn), .logo[href^="#"]').forEach(anchor => {
+                if (anchor.getAttribute('href') === '#') return;
+                anchor.addEventListener('click', function (e) {
+                    const hrefAttribute = this.getAttribute('href');
+                    if (hrefAttribute && hrefAttribute.startsWith('#')) {
+                        e.preventDefault();
+                        const targetId = hrefAttribute.substring(1);
+                        const targetElement = document.getElementById(targetId);
+                        if (targetElement) {
+                            const header = document.querySelector('.main-header');
+                            const headerOffset = header ? header.offsetHeight : 0;
+                            const elementPosition = targetElement.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: "smooth"
+                            });
+                        }
+                    }
+                });
+            });
+
+            // --- Active Nav Link Highlighting ---
+            const navLinks = document.querySelectorAll('.main-nav a[href^="#"]:not(.btn)');
+            const scrollSections = Array.from(navLinks)
+                .map(link => {
+                    const id = link.getAttribute('href')?.substring(1);
+                    return id ? document.getElementById(id) : null;
+                })
+                .filter(section => section !== null);
+
+            function highlightNavLink() {
+                let currentSectionId = '';
+                const header = document.querySelector('.main-header');
+                const currentHeaderHeight = header ? header.offsetHeight : 0;
+                const scrollY = window.pageYOffset;
+
+                scrollSections.forEach(section => {
+                    const sectionTop = section.offsetTop - currentHeaderHeight - 20; // 20px offset for earlier highlighting
+                    const sectionBottom = sectionTop + section.offsetHeight;
+
+                    if (scrollY >= sectionTop && scrollY < sectionBottom) {
+                        currentSectionId = section.id;
+                    }
+                });
+                
+                // If near the bottom of the page, the last section might be active
+                if (scrollY + window.innerHeight >= document.body.offsetHeight - 50) { // 50px tolerance from bottom
+                    if (scrollSections.length > 0) {
+                         currentSectionId = scrollSections[scrollSections.length -1].id;
+                    }
+                }
+
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    const href = link.getAttribute('href');
+                    if (href && href.substring(1) === currentSectionId) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', highlightNavLink);
+            highlightNavLink(); // Initial call
+        });
+    </script>
+
+</body>
+</html>
