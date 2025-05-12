@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fayara - Privacy Policy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4F46E5; /* Modern indigo */
+            --primary-hover-color: #4338CA;
+            --primary-light-color: #EEF2FF;
+            --secondary-color: #6B7280; /* Cool Gray */
+            --light-bg-color: #F9FAFB; /* Page background */
+            --dark-text-color: #111827;
+            --light-text-color: #4B5563;
+            --white-color: #FFFFFF;
+            --border-color: #E5E7EB;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+            --transition-duration: 0.3s;
+            --header-height: 80px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--dark-text-color);
+            background-color: var(--white-color);
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        /* Header Styles */
+        .main-header {
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 0 20px;
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .main-header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+            text-decoration: none;
+        }
+
+        .main-nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            margin: 0;
+        }
+
+        .main-nav li {
+            margin-left: 30px;
+        }
+
+        .main-nav a {
+            color: var(--dark-text-color);
+            font-weight: 500;
+            text-decoration: none;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .main-nav a:not(.btn):after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .main-nav a:not(.btn):hover:after,
+        .main-nav a:not(.btn).active:after { /* Active class can be set by JS if needed */
+            width: 100%;
+        }
+        /* End Header Styles */
+
+        main {
+            display: block;
+        }
+
+        .privacy-section {
+            background-color: var(--light-bg-color);
+            padding-top: calc(var(--header-height) + 60px);
+            padding-bottom: 60px;
+            min-height: calc(100vh - var(--header-height) - 180px); /* Adjust based on footer height */
+        }
+
+        .privacy-content-card {
+            max-width: 900px; /* Slightly wider for policy text */
+            margin: 0 auto;
+            padding: 40px 50px;
+            background-color: var(--white-color);
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .privacy-content-card h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1.2em;
+            background: linear-gradient(90deg, var(--primary-color) 0%, #8B5CF6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        .privacy-content-card h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark-text-color);
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.3em;
+        }
+
+        .privacy-content-card p,
+        .privacy-content-card ul li {
+            color: var(--light-text-color);
+            margin-bottom: 1em;
+            line-height: 1.8; /* Slightly more line height for readability */
+        }
+
+        .privacy-content-card ul {
+            padding-left: 20px;
+            list-style-type: disc;
+        }
+
+        .privacy-content-card strong {
+            color: var(--dark-text-color);
+            font-weight: 600;
+        }
+
+        .privacy-content-card .last-updated {
+            text-align: center;
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            margin-bottom: 2.5em;
+        }
+
+        /* Footer Styles */
+        .main-footer {
+            background-color: #1F2937;
+            color: #9CA3AF;
+            padding: 70px 0 50px;
+            text-align: center;
+        }
+        .main-footer p {
+            margin-bottom: 12px;
+            color: #9CA3AF;
+            font-size: 0.95rem;
+        }
+        .main-footer a {
+            color: #E5E7EB;
+            transition: color 0.3s ease;
+            text-decoration: none;
+        }
+        .main-footer a:hover {
+            color: var(--white-color);
+        }
+        .footer-nav ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 25px;
+        }
+        .footer-nav li {
+            display: inline-block;
+            margin: 0 15px;
+        }
+        /* End Footer Styles */
+
+        /* Responsive Styles for Header */
+        @media (max-width: 768px) {
+            .main-header {
+                height: auto;
+                padding-top: 15px;
+                padding-bottom: 15px;
+            }
+            .main-header .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .main-nav {
+                width: 100%;
+                justify-content: center;
+                margin-top: 15px;
+            }
+            .main-nav ul {
+                flex-wrap: wrap;
+                gap: 5px 15px;
+            }
+            .main-nav li {
+                margin-left: 0;
+            }
+            .privacy-section {
+                padding-top: calc(var(--header-height) + 30px + 30px); /* header + nav potential wrap + section padding */
+            }
+            .privacy-content-card {
+                padding: 30px 25px;
+            }
+            .privacy-content-card h1 {
+                font-size: 2rem;
+            }
+            .privacy-content-card h2 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo">Fayara</a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#how-it-works">How It Works</a></li>
+                    <li><a href="index.html#cta">Get Fayara</a></li>
+                    <li><a href="help.html">Help</a></li>
+                    <!-- No "Privacy Policy" link in main nav to keep it consistent with other pages -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="privacy-section">
+            <div class="container">
+                <div class="privacy-content-card">
+                    <h1>Privacy Policy</h1>
+                    <p class="last-updated">Last Updated: May 10, 2025</p>
+
+                    <p>Welcome to Fayara! Your privacy is critically important to us. This Privacy Policy document outlines the types of information that is collected and recorded by Fayara and how we use it. Fayara is designed with privacy as a core principle, primarily by processing data locally on your device.</p>
+
+                    <h2>1. Information We Collect</h2>
+                    <p>Fayara is a browser extension that operates locally on your computer using Ollama. As such:</p>
+                    <ul>
+                        <li><strong>No Personal Data Transmitted to Us:</strong> Fayara does not collect, store, or transmit any of your personal data, browsing history, or the content you process (e.g., text for proofreading, chat queries, PDF content) to any external servers owned or operated by the Fayara developers. All AI processing is handled by your local Ollama instance.</li>
+                        <li><strong>Local Storage:</strong> The extension may store settings and preferences locally in your browser's storage to enhance your user experience. This data remains on your computer and is not accessed by us.</li>
+                        <li><strong>Ollama Interaction:</strong> Fayara communicates with your local Ollama installation. The data exchanged between Fayara and Ollama stays on your local network. Please refer to Ollama's own privacy policy and documentation for how it handles data.</li>
+                    </ul>
+
+                    <h2>2. How We Use Your Information</h2>
+                    <p>Since we do not collect personal information, we do not use it for any purpose. The extension uses the capabilities of your local Ollama instance to provide its features directly within your browser.</p>
+
+                    <h2>3. Data Security</h2>
+                    <p>We are committed to ensuring that your information is secure. As Fayara processes data locally, the security of your data primarily depends on the security of your own computer and your local Ollama setup. We recommend following best practices for securing your personal devices and network.</p>
+
+                    <h2>4. Third-Party Services</h2>
+                    <p>Fayara itself does not integrate with third-party services that would involve sharing your data, other than its necessary interaction with your local Ollama instance. If you choose to download models for Ollama from third-party sources (e.g., Ollama's official library or other model hubs), your interaction with those services is subject to their respective privacy policies.</p>
+
+                    <h2>5. Children's Privacy</h2>
+                    <p>Fayara does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on any platform related to Fayara (which should not be possible through the extension itself), please contact us immediately and we will do our best efforts to promptly remove such information from our records if any were inadvertently collected through other communication channels (e.g., support emails).</p>
+
+                    <h2>6. Changes to This Privacy Policy</h2>
+                    <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
+                    <p>The "Last Updated" date at the top of this Privacy Policy indicates when it was last revised.</p>
+
+                    <h2>7. Consent</h2>
+                    <p>By using our browser extension, you hereby consent to our Privacy Policy and agree to its terms.</p>
+
+                    <h2>8. Contact Us</h2>
+                    <p>If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at [Your Contact Email or Link to Contact/Support Page].</p>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <nav class="footer-nav">
+                <ul>
+                    <li><a href="privacyPolicy.html">Privacy Policy</a></li>
+                    <li><a href="onboarding.html">Onboarding Guide</a></li>
+                    <li><a href="help.html">Help</a></li>
+                    <li><a href="https://github.com/MDFahimAnjum/fayara.github.io">Contact/Support</a></li>
+                </ul>
+            </nav>
+            <p>&copy; 2024 Fayara. All rights reserved.</p>
+            <p>Fayara is a browser extension that enhances your web experience with local AI capabilities via Ollama.</p>
+        </div>
+    </footer>
+</body>
+</html>

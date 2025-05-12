@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fayara Settings Help</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4F46E5; /* Modern indigo */
+            --primary-hover-color: #4338CA;
+            --primary-light-color: #EEF2FF;
+            --secondary-color: #6B7280; /* Cool Gray */
+            --light-bg-color: #F9FAFB; /* Page background */
+            --dark-text-color: #111827;
+            --light-text-color: #4B5563;
+            --white-color: #FFFFFF;
+            --border-color: #E5E7EB;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+            --transition-duration: 0.3s;
+            --header-height: 80px; /* From index.html */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--dark-text-color);
+            background-color: var(--white-color); /* Match index.html body */
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .container { /* From index.html */
+            width: 90%;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        /* Header Styles from index.html */
+        .main-header {
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 0 20px;
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .main-header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+            text-decoration: none;
+        }
+
+        .main-nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            margin: 0;
+        }
+
+        .main-nav li {
+            margin-left: 30px;
+        }
+
+        .main-nav a {
+            color: var(--dark-text-color);
+            font-weight: 500;
+            text-decoration: none;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .main-nav a:not(.btn):after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .main-nav a:not(.btn):hover:after,
+        .main-nav a:not(.btn).active:after {
+            width: 100%;
+        }
+
+        .main-nav a.active {
+            color: var(--primary-color);
+        }
+        /* End Header Styles */
+
+        main {
+            display: block; /* Ensure main is treated as a block */
+        }
+
+        .help-section {
+            background-color: var(--light-bg-color); /* Light gray background for the section */
+            padding-top: calc(var(--header-height) + 60px); /* Space for fixed header + section padding */
+            padding-bottom: 60px;
+            min-height: calc(100vh - var(--header-height) - 180px); /* Adjust 180px based on footer height + section padding */
+        }
+
+        .help-container-card { /* Renamed from .help-container */
+            max-width: 800px;
+            margin: 0 auto; /* Centered within .container of .help-section */
+            padding: 30px 40px;
+            background-color: var(--white-color);
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+        }
+
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1.2em; /* Adjusted margin slightly for visual balance with gradient */
+            background: linear-gradient(90deg, var(--primary-color) 0%, #8B5CF6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            border-bottom: none;
+        }
+
+        .help-container-card > p:first-of-type { /* Intro paragraph inside the card */
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--light-text-color);
+            margin-bottom: 40px;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        details {
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--white-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+            transition: box-shadow var(--transition-duration) ease;
+            overflow: hidden; /* To contain rounded corners with summary bg */
+        }
+
+        details:hover {
+            box-shadow: var(--card-shadow);
+        }
+
+        summary {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color); /* Changed to primary color for consistency */
+            padding: 18px 25px;
+            margin: 0;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: none;
+            background-color: var(--white-color); /* Explicitly set for collapsed state */
+            transition: background-color var(--transition-duration) ease; /* Color transition no longer needed here */
+        }
+        summary::-webkit-details-marker {
+            display: none;
+        }
+        summary::marker { /* Standard */
+            display: none;
+        }
+
+        summary::after {
+            content: '▶'; /* Right arrow for collapsed */
+            font-size: 0.7em;
+            margin-left: 10px;
+            transition: transform var(--transition-duration) ease-in-out;
+            display: inline-block;
+            transform: rotate(0deg); /* Start pointing right */
+        }
+
+        details[open] > summary {
+            background-color: var(--primary-light-color);
+            /* color: var(--primary-color); */ /* Color is now inherited or set by base summary */
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        details[open] > summary::after {
+            transform: rotate(90deg); /* Point down when open */
+        }
+
+        .setting-item-container {
+            padding: 20px 25px 25px 25px;
+        }
+        /* For the RAG section's intro paragraph */
+        .setting-item-container > p {
+            color: var(--light-text-color);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .setting-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: var(--light-bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            margin-left: 0;
+        }
+        .setting-item:last-child {
+            margin-bottom: 0;
+        }
+        .setting-item strong {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        .setting-item p {
+            color: var(--light-text-color);
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        .setting-item p:last-child {
+            margin-bottom: 0;
+        }
+        code {
+            background-color: var(--primary-light-color);
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            font-size: 0.9em;
+            color: #6D28D9;
+            border: 1px solid #DDE2F1;
+        }
+        .setting-item small {
+            color: var(--secondary-color);
+            display: block;
+            margin-top: 8px;
+            font-size: 0.85em;
+            line-height: 1.5;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 40px 0;
+        }
+
+        .help-container-card > p:last-of-type { /* Final "Remember to save" paragraph inside the card */
+            text-align: center;
+            font-weight: 500;
+            color: var(--dark-text-color);
+            background-color: var(--primary-light-color);
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--primary-color);
+            margin-top: 30px;
+        }
+
+        /* Footer Styles from index.html */
+        .main-footer {
+            background-color: #1F2937; /* Dark blue-gray */
+            color: #9CA3AF; /* Lighter gray for text */
+            padding: 70px 0 50px;
+            text-align: center;
+        }
+        .main-footer p {
+            margin-bottom: 12px;
+            color: #9CA3AF;
+            font-size: 0.95rem;
+        }
+        .main-footer a {
+            color: #E5E7EB; /* Even lighter for links */
+            transition: color 0.3s ease;
+            text-decoration: none;
+        }
+        .main-footer a:hover {
+            color: var(--white-color);
+        }
+        .footer-nav ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 25px;
+        }
+        .footer-nav li {
+            display: inline-block;
+            margin: 0 15px;
+        }
+        /* End Footer Styles */
+
+        /* Responsive Styles for Header (from index.html) */
+        @media (max-width: 768px) {
+            .main-header {
+                height: auto; /* Allow header to grow if nav wraps */
+                padding-top: 15px;
+                padding-bottom: 15px;
+            }
+            .main-header .container {
+                flex-direction: column;
+                align-items: center; /* Center logo and nav */
+            }
+            .main-nav {
+                width: 100%;
+                justify-content: center;
+                margin-top: 15px;
+            }
+            .main-nav ul {
+                flex-direction: row; /* Keep nav items in a row if space allows */
+                justify-content: center;
+                flex-wrap: wrap; /* Allow nav items to wrap */
+                gap: 5px 15px; /* Spacing for wrapped items */
+            }
+            .main-nav li {
+                margin-left: 0; /* Remove left margin, use gap instead */
+            }
+            .help-section {
+                padding-top: calc(var(--header-height) + 30px + 30px); /* header + nav potential wrap + section padding */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo">Fayara</a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#how-it-works">How It Works</a></li>
+                    <li><a href="index.html#cta">Get Fayara</a></li>
+                    <li><a href="help.html" class="active">Help</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="help-section">
+            <div class="container">
+                <div class="help-container-card">
+                    <h1>Fayara Settings Explained</h1>
+                    <p>This document explains the various settings available in the Fayara browser extension to customize your experience. Click on the sections to expand or collapse them.</p>
+
+                    <!-- Connection Settings - Collapsible -->
+                    <details>
+                        <summary>Connection</summary>
+                        <div class="setting-item-container">
+                            <div class="setting-item">
+                                <strong>Ollama URL:</strong>
+                                <p>This is the network address where your Ollama instance is running. Typically, if Ollama is running on your local machine, this will be <code>http://127.0.0.1:11434</code> or <code>http://localhost:11434</code>. Ensure this URL is correct for Fayara to connect to your local AI models.</p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- Chat Settings - Collapsible -->
+                    <details>
+                        <summary>Chat</summary>
+                        <div class="setting-item-container">
+                            <div class="setting-item">
+                                <strong>Temperature:</strong>
+                                <p>Controls the randomness of the AI's responses during chat. Lower values (e.g., 0.2) make the output more focused and deterministic, while higher values (e.g., 1.0) make it more creative and diverse. The default is usually around 0.7.</p>
+                            </div>
+                            <div class="setting-item">
+                                <strong>Max Tokens:</strong>
+                                <p>Sets the maximum number of tokens (words or parts of words) the AI can generate in a single chat response. This helps control the length of the AI's answers.</p>
+                            </div>
+                            <div class="setting-item">
+                                <strong>Stream Responses:</strong>
+                                <p>When checked, the AI's response will appear word-by-word (streamed) as it's being generated. When unchecked, you'll wait until the entire response is generated before it appears. Streaming provides faster initial feedback.</p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- Proofread Settings - Collapsible -->
+                    <details>
+                        <summary>Proofread</summary>
+                        <div class="setting-item-container">
+                            <div class="setting-item">
+                                <strong>Enable Proofread:</strong>
+                                <p>Check this box to enable the proofreading feature, which allows you to select text on a webpage and have an AI model check it for grammar and suggest improvements.</p>
+                            </div>
+                            <div class="setting-item">
+                                <strong>Proofread Model:</strong>
+                                <p>Select the specific Ollama model you want to use for the proofreading task. Some models might be better suited for grammar correction than others.</p>
+                            </div>
+                            <div class="setting-item">
+                                <strong>Temperature:</strong>
+                                <p>Controls the randomness for the proofreading model. Lower values are generally recommended for proofreading to ensure more accurate and consistent corrections.</p>
+                            </div>
+                            <div class="setting-item">
+                                <strong>Max Tokens:</strong>
+                                <p>Sets the maximum length of the suggested proofread text generated by the AI.</p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- Autocomplete Settings - Collapsible -->
+                    <details>
+                        <summary>Autocomplete</summary>
+                        <div class="setting-item-container">
+                            <div class="setting-item">
+                                <strong>Enable Autocomplete:</strong>
+                                <p>Check this box to enable the text autocomplete feature. As you type in text fields on webpages, Fayara will suggest text completions using an AI model.</p>
+                            </div>
+                            <div class="setting-item">
+                                <strong>Autocomplete Model:</strong>
+                                <p>Select the specific Ollama model you want to use for generating text suggestions.</p>
+                            </div>
+                            <div class="setting-item">
+                                <strong>Temperature:</strong>
+                                <p>Controls the randomness of the autocomplete suggestions. Higher values might offer more creative but potentially less relevant suggestions.</p>
+                            </div>
+                            <div class="setting-item">
+                                <strong>Max Generated Tokens:</strong>
+                                <p>Sets the maximum number of tokens the AI will generate for a single autocomplete suggestion.</p>
+                            </div>
+                            <div class="setting-item">
+                                <strong>Max Context Before Cursor (tokens):</strong>
+                                <p>Defines the maximum amount of text (in tokens) before your cursor that will be sent to the AI as context for generating suggestions.</p>
+                            </div>
+                            <div class="setting-item">
+                                <strong>Max Context After Cursor (tokens):</strong>
+                                <p>Defines the maximum amount of text (in tokens) after your cursor that will be sent to the AI as context. This is useful for models that support "fill-in-the-middle" tasks.</p>
+                            </div>
+                            <div class="setting-item">
+                                <strong>Auto Suggest Delay (ms):</strong>
+                                <p>The time (in milliseconds) Fayara waits after you stop typing before automatically triggering an autocomplete suggestion (if 'Auto Suggest' is enabled).</p>
+                                <small>(Time to wait after typing)</small>
+                            </div>
+                            <div class="setting-item">
+                                <strong>Wait For Space:</strong>
+                                <p>If checked, automatic suggestions ('Auto Suggest') will only trigger after you press the spacebar, rather than just pausing.</p>
+                                <small>(Only auto-suggest after spacebar)</small>
+                            </div>
+                            <div class="setting-item">
+                                <strong>Trigger Key:</strong>
+                                <p>Select the keyboard shortcut (<code>Tab</code> or <code>Ctrl+Space</code>) used to manually request an autocomplete suggestion or accept the current suggestion.</p>
+                            </div>
+                            <div class="setting-item">
+                                <strong>Auto Suggest:</strong>
+                                <p>If checked, Fayara will automatically try to generate suggestions after you pause typing (respecting the 'Auto Suggest Delay' and 'Wait For Space' settings). If unchecked, you must use the 'Trigger Key' to get suggestions.</p>
+                                <small>(Suggest after pausing)</small>
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- RAG & Embeddings Settings - Collapsible -->
+                    <details>
+                        <summary>RAG & Embeddings</summary>
+                        <div class="setting-item-container">
+                            <p>These settings configure how Fayara processes documents (like web pages or PDFs) for Retrieval-Augmented Generation (RAG), allowing the chat AI to use information from these documents as context.</p>
+                            <div class="setting-item">
+                                <strong>Embedding Model:</strong>
+                                <p>Select the Ollama model used to create numerical representations (embeddings) of text chunks. These embeddings help find the most relevant parts of the document to answer your questions.</p>
+                            </div>
+                            <div class="setting-item">
+                                <strong>Chunk Size (tokens):</strong>
+                                <p>The maximum size (in tokens) of each text segment the document is broken into before creating embeddings. Larger chunks capture more context but might be less specific.</p>
+                            </div>
+                            <div class="setting-item">
+                                <strong>Overlap Size (tokens):</strong>
+                                <p>The number of tokens that will overlap between consecutive text chunks. Overlap helps ensure that context isn't lost at the boundaries between chunks.</p>
+                            </div>
+                            <div class="setting-item">
+                                <strong>Maximum Context Size (tokens):</strong>
+                                <p>The maximum total size (in tokens) of the relevant chunks retrieved from the document that will be added to the chat model's context when answering your questions based on the document.</p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <hr>
+                    <p>Remember to click the "Save Settings" button in the extension panel after making any changes!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <nav class="footer-nav">
+                <ul>
+                    <li><a href="privacyPolicy.html">Privacy Policy</a></li>
+                    <li><a href="onboarding.html">Onboarding Guide</a></li>
+                    <li><a href="help.html">Help</a></li>
+                    <li><a href="https://github.com/MDFahimAnjum/fayara.github.io">Contact/Support</a></li>
+                </ul>
+            </nav>
+            <p>&copy; 2024 Fayara. All rights reserved.</p>
+            <p>Fayara is a browser extension that enhances your web experience with local AI capabilities via Ollama.</p>
+        </div>
+    </footer>
+</body>
+</html>
