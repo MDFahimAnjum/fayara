@@ -1,6 +1,9 @@
 # Fayara: Your Local AI Powerhouse for Browsers
 
-[![Fayara Logo](https://img.shields.io/badge/Fayara-AI%20Browser%20Extension-4F46E5?style=for-the-badge&logo=firefoxbrowser)](https://mdfahimanjum.github.io/fayara.github.io/)
+[![Fayara Logo](https://img.shields.io/badge/Fayara-AI%20Browser%20Extension-4F46E5?style=for-the-badge&logo=firefoxbrowser)](https://mdfahimanjum.github.io/fayara.github.io/) 
+
+![License: Non-Commercial Use Only](https://img.shields.io/badge/license-Non--Commercial-lightgrey)
+
 
 Experience the future of browsing with AI that runs directly on your machine. Fayara empowers you to chat, summarize, proofread, and automate tasks with enhanced privacy and full control over your data.
 
@@ -105,7 +108,7 @@ Improve your writing with AI-powered grammar checking, rephrasing, and style sug
 3.  **🚀 Install Fayara:**
     Add the Fayara extension to your Firefox browser and start exploring!
 
-    
+
     <a href="https://github.com/MDFahimAnjum/fayara/releases/download/v1.0.0/fayara-firefox-1.0.0.xpi" rel="noopener noreferrer">
       <img src="https://img.shields.io/badge/Install%20Fayara%20for%20Firefox-v1.0.0-4F46E5?style=for-the-badge&logo=firefoxbrowser" alt="Install Fayara for Firefox">
     </a>
@@ -126,3 +129,11 @@ Ready to power up your browsing? Join the growing community of users who are tak
 ## 🙏 Acknowledgements
 
 *   Fayara relies on the powerful **Ollama** platform to run local large language models.
+
+
+## License
+
+This project is licensed under a **Custom Non-Commercial License**. You may use, modify, and distribute this code for **non-commercial purposes only**. 
+
+**Commercial use is strictly prohibited** without prior written permission. For licensing inquiries, please contact: dr.fahim.anjum@gmail.com
+
